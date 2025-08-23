@@ -54,7 +54,11 @@ let projects = allProjects;
 
 if (argv.onlyProjects) {
     const onlyList = argv.onlyProjects.split(',').map(p => p.trim());
-    projects = allProjects.filter(p => onlyList.includes(p));
+    if (onlyList.length === 1 && onlyList[0] === '') {
+        projects = [];
+    } else {
+        projects = allProjects.filter(p => onlyList.includes(p));
+    }
 } else if (argv.skipProjects) {
     const skipList = argv.skipProjects.split(',').map(p => p.trim());
     projects = allProjects.filter(p => !skipList.includes(p));
